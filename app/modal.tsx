@@ -1,17 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
+import { Platform, StyleSheet, Linking, Pressable } from 'react-native';
 import { Text, View } from '@/components/Themed';
+
+export const title = "About App";
 
 export default function ModalScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
+      <Text style={styles.title}>Quality of Life Mobile App</Text>
+      <Text style={styles.text}>
+        Quality of Life data loaded from{' '}
+        <Pressable onPress={() => Linking.openURL('https://www.numbeo.com/quality-of-life/rankings_by_country.jsp')}>
+          <Text style={{ color: '#1976d2', textDecorationLine: 'underline' }}>numbeo</Text>
+        </Pressable>
+      </Text>
+      <Text style={styles.text}>
+        Location of countries loaded from{' '}
+        <Pressable onPress={() => Linking.openURL('https://restcountries.com/')}>
+          <Text style={{ color: '#1976d2', textDecorationLine: 'underline' }}>restcountries</Text>
+        </Pressable>
+      </Text>
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
   );
@@ -27,9 +35,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  text: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    textAlign: 'center',
   },
 });
